@@ -4,11 +4,98 @@
     <meta charset="UTF-8" />
     <title>Issues Dashboard</title>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
   </head>
-
   <body>
+    <nav class="navbar">
+      <div class="nav-left">
+        <img src="./assets/github-logo.png" alt="" class="nav-logo" />
+        <h2>GitHub Issues Tracker</h2>
+      </div>
+
+      <div class="nav-right">
+        <input id="searchInput" placeholder="Search issues..." />
+        <button class="primary-btn" onclick="searchIssue()">Search</button>
+      </div>
+    </nav>
+
+    <div class="main-container">
+      <div class="tabs">
+        <button class="active" onclick="filterIssues('all', this)">All</button>
+        <button onclick="filterIssues('open', this)">Open</button>
+        <button onclick="filterIssues('closed', this)">Closed</button>
+      </div>
+
+      <div class="issues-header">
+        <div class="left">
+          <div class="circle-icon">
+            <img src="./assets/Aperture.png" alt="" />
+          </div>
+          <div class="issueCount-1">
+            <h3><span id="issueCount">0</span> Issues</h3>
+            <p>Track and manage your project issues</p>
+          </div>
+        </div>
+
+        <div class="legend">
+          <span class="dot open"></span> Open
+          <span class="dot closed"></span> Closed
+        </div>
+      </div>
+
+      <div id="spinner" class="spinner hidden"></div>
+
+      <div id="issuesContainer" class="issues-grid"></div>
+    </div>
+
+    <div id="modal" class="modal hidden">
+      <div class="modal-card">
+        <h2 id="modalTitle"></h2>
+
+        <div class="modal-meta">
+          <span id="status-dyn"></span>
+
+          <span id="modalAuthor"></span>
+
+          <span id="modalDate"></span>
+        </div>
+
+        <div class="labels" id="modalLabels">
+          <!-- <span class="bug">BUG</span>
+          <span class="help">HELP WANTED</span>
+          <span class="en"></span> -->
+        </div>
+
+        <p id="modalDesc" class="description"></p>
+
+        <div class="details">
+          <div>
+            <p class="detail-title">Assignee:</p>
+            <h4 id="modalAssignee"></h4>
+          </div>
+
+          <div>
+            <p class="detail-title">Priority:</p>
+            <span id="modalPriority" class="priority"></span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button onclick="closeModal()" class="close-btn">Close</button>
+        </div>
+      </div>
+    </div>
     <script src="js/app.js"></script>
   </body>
 </html>
