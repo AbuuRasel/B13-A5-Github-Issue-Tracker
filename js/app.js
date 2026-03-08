@@ -134,7 +134,63 @@ async function searchIssue() {
 
   hideSpinner();
 }
+/* ------------------ Modal ------------------ */
 
+async function openModal(id) {
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
+  );
+
+  const data = await res.json();
+  const issue = data.data;
+
+  document.getElementById("modalTitle").innerText = issue.title;
+  document.getElementById("status-dyn").innerHTML = `
+<img class="status-icon" src="${
+    issue.status === "open"
+      ? "./assets/Open-Status.png"
+      : "./assets/Closed- Status .png"
+  }">
+`;
+
+  document.getElementById("modalDesc").innerText = issue.description;
+
+  document.getElementById("modalAuthor").innerText =
+    " •  Opened by " + issue.author;
+
+  document.getElementById("modalDate").innerText =
+    " • " + new Date(issue.createdAt).toLocaleDateString();
+
+  document.getElementById("modalPriority").innerHTML =
+    // issue.priority.toUpperCase();
+    `<div class="priority ${issue.priority}">
+    ${issue.priority.toUpperCase()}
+  </div>`;
+
+  document.getElementById("modalAssignee").innerText = issue.author;
+
+  /* ---------- Dynamic Labels ---------- */
+
+  let labelsHTML = issue.labels
+    .map((label) => {
+      const className = label.replace(/\s+/g, "-");
+
+      return `<span class="label ${className}">
+                  ${label.toUpperCase()}
+                </span>`;
+    })
+    .join("");
+
+  document.getElementById("modalLabels").innerHTML = labelsHTML;
+
+  document.getElementById("modal").classList.remove("hidden");
+}
+
+/* ------------------ Close Modal ------------------ */
+
+function closeModal() {
+  document.getElementById("modal").classList.add("hidden");
+}
 
 /* ------------------ Start ------------------ */
 
