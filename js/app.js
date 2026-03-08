@@ -51,3 +51,91 @@ function filterIssues(status, btn) {
     hideSpinner();
   }, 300);
 }
+/* ------------------ Display Issues ------------------ */
+
+function displayIssues(issues) {
+  const container = document.getElementById("issuesContainer");
+  container.innerHTML = "";
+
+  document.getElementById("issueCount").innerText = issues.length;
+
+  issues.forEach((issue) => {
+    const card = document.createElement("div");
+    card.classList.add("issue-card", issue.status);
+
+    /* ---------- Dynamic Labels ---------- */
+
+    let labelsHTML = issue.labels
+      .map((label) => {
+        const className = label.replace(/\s+/g, "-");
+
+        return `<span class="label ${className}">
+              ${label.toUpperCase()}
+            </span>`;
+
+        /* ---------- Card HTML ---------- */
+      })
+      .join("");
+    card.innerHTML = `
+  
+    <div class="top">
+
+    <img class="status-icon" src="${
+      issue.status === "open"
+        ? "./assets/Open-Status.png"
+        : "./assets/Closed- Status .png"
+    }">
+  
+    <div class="priority ${issue.priority}">
+      ${issue.priority.toUpperCase()}
+    </div>
+  
+  </div>
+  
+  <h4 class='issue-title'>${issue.title}</h4>
+  
+  <p class='issue-description'>${issue.description.slice(0, 70)}...</p>
+  
+  <div class="labels">
+  
+    ${labelsHTML}
+  
+  </div>
+  
+  <div class="footer">
+  
+    <span># by ${issue.author}</span>
+  
+    <span>${new Date(issue.createdAt).toLocaleDateString()}</span>
+  
+  </div>
+  
+  `;
+
+    card.onclick = () => openModal(issue.id);
+
+    container.appendChild(card);
+  });
+}
+/* ------------------ Search Issue ------------------ */
+
+async function searchIssue() {
+  showSpinner();
+
+  const text = document.getElementById("searchInput").value;
+
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`,
+  );
+
+  const data = await res.json();
+
+  displayIssues(data.data);
+
+  hideSpinner();
+}
+
+
+/* ------------------ Start ------------------ */
+
+loadIssues();
