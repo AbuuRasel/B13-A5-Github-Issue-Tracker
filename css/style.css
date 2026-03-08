@@ -24,7 +24,7 @@ body {
 .login-card {
   background: white;
   padding: 40px;
-  width: 400px;
+  width: 360px;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -91,6 +91,7 @@ body {
   border-radius: 8px;
   font-size: 14px;
 }
+
 /* NAVBAR */
 
 .navbar {
@@ -137,6 +138,7 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
+
 /* MAIN */
 
 .main-container {
@@ -227,7 +229,9 @@ body {
 .closed {
   background: #8b5cf6;
   font-weight: 600;
+
 }
+
 /* GRID */
 
 .issues-grid {
@@ -248,13 +252,13 @@ body {
   gap: 10px;
 }
 
-.issue-title {
+.issue-title{
   margin: 10px 0;
 }
-.issue-description {
+.issue-description{
   font-size: 15px;
   font-weight: 500;
-  color: #1f2937;
+  color: #1F2937;
   text-align: justify;
 }
 .issue-card.open {
@@ -286,12 +290,12 @@ body {
 
 .priority.high {
   background: #ffeded;
-  color: #ef4444;
+  color: #EF4444;
 }
 
 .priority.medium {
   background: #fff6d1;
-  color: #f59e0b;
+  color: #F59E0B;
 }
 
 .priority.low {
@@ -391,7 +395,8 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-#status-dyn {
+#status-dyn{
+
 }
 .status-icon {
   width: 20px;
@@ -479,6 +484,7 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
+
 /* SPINNER */
 
 .spinner {
