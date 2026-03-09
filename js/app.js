@@ -170,7 +170,7 @@ async function openModal(id) {
     ${issue.priority.toUpperCase()}
   </div>`
 
-  document.getElementById("modalAssignee").innerText = issue.author;
+  document.getElementById("modalAssignee").innerText = `${issue.assignee?issue.assignee:"Not found"}`;
 
   /* ---------- Dynamic Labels ---------- */
 
